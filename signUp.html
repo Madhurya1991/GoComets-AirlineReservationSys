@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>GoComets | Sign Up</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel = "stylesheet" href="css/home.css">
+  <script src = "js/home.js"></script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <!--<a class="navbar-brand" href="home.html"></a>-->
+	   <img src="images/logo1.png" alt="GoComets"/>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="home.html">HOME</a></li>
+        <li><a href="viewFlights.php"> BOOK FLIGHTS</a></li>
+        <li><a href="home.html">LOG IN</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--Signup-->
+<div class="jumbotron">
+<h1>Register </h1>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-sm-offset-0 col-xs-offset-0 col-md-offset-0">
+            <form action="signup.php" method="post" class="form" role="form">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <label for = "firstname">First Name: </label><input class="form-control" name="firstname" id = "firstname" placeholder="First Name" type="text" required autofocus />
+                </div>
+                <div class="col-xs-6 col-md-6">
+                   <label for = "lasttname">Last Name: </label><input class="form-control" name="lastname" id = "lastname" placeholder="Last Name" type="text" required />
+                </div>
+            </div>
+             <label for = "email">Email: </label><input class="form-control" name="email" id = "email" placeholder="Your Email" type="email" />
+             <label for = "password">Password: </label>
+				<input class="form-control" name="password" id= "password" placeholder="New Password" type="password" data-indicator="pwindicator" required/> 
+			<div id="pwindicator">
+					<div class="bar"></div>
+					<div class="label"></div>
+			</div>
+			 <label for = "confirmpassword">Confirm Password: </label><input class="form-control" name="confirmpassword" id= "confirmpassword" data-match="#password" data-match-error="Whoops, these don't match" placeholder="Confirm Password" type="password" />
+            <label for="birthdate">
+                Birth Date</label>
+               <input class = "form-control" name="birthdate" placeholder="Birthdate" type="date" required/>
+            <br />
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Register</button>
+            </form>
+        </div>
+ </div>  
+
+ <div style="position:absolute; margin-top:-500px; margin-left:450px;">
+<h3> Terms and Conditions</h3>
+		
+By clicking on "Register" you agree to The Company's' Terms and Conditions<br/><br/>
+
+While rare, prices are subject to change based on exchange rate fluctuations - should such a fluctuation happen, we may request an additional payment. <br/><br/>
+
+Should there be an error in the description or pricing of a product, we will provide you with a full refund <br/><br/>
+
+Acceptance of an order by us is dependent on our suppliers ability to provide the product.
+ </div> 
+
+</div>
+
+<script src="vendor/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+   <script src="jquery.pwstrength.js" type="text/javascript" charset="utf-8"></script>
+   <script type="text/javascript">
+       jQuery(function($) { $('#password').pwstrength(); });
+</script>
+
+<script type="text/javascript">
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirmpassword");
+
+function validatePassword(){
+var pword = password.value;
+var msg = document.createElement("p");
+
+	/*if(pword.length < 8)
+		password.setCustomValidity('password length is less than 8');
+	*/
+	
+
+  if(password.value != confirm_password.value) {
+	//alert("pass1 :"+password.value+" pass2: " +confirm_password.value);
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+  
+  var check = checkPassStrength(pword);
+  //window.confirm(check);
+	//password.setCustomValidity(check);
+	/*var t = document.createTextNode(check);
+	//var sp = document.getElementByID("strength");
+	//sp.removeChild(sp.childNodes[0]);
+	msg.appendChild(t);
+	document.getElementById("strength").appendChild(msg);*/
+}
+
+function scorePassword(pass) {
+    var score = 0;
+    if (!pass)
+        return score;
+
+    // award every unique letter until 5 repetitions
+    var letters = new Object();
+    for (var i=0; i<pass.length; i++) {
+        letters[pass[i]] = (letters[pass[i]] || 0) + 1;
+        score += 5.0 / letters[pass[i]];
+    }
+
+    // bonus points for mixing it up
+    var variations = {
+        digits: /\d/.test(pass),
+        lower: /[a-z]/.test(pass),
+        upper: /[A-Z]/.test(pass),
+        nonWords: /\W/.test(pass),
+    }
+
+    variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
+
+    return parseInt(score);
+}
+
+function checkPassStrength(pass) {
+    var score = scorePassword(pass);
+    if (score > 80)
+        return "strong";
+    if (score > 60)
+        return "good";
+    if (score >= 30)
+        return "weak";
+
+    return "";
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>&copy; GoComets. All Rights Reserved </p>
+</footer>
+
+</body>
+</html>
+
